@@ -14,7 +14,7 @@ function MiniTicket({ticket}) {
             <div class="card-body p-4">
                 <h3 class="mb-3"><strong>{ticket.title}</strong></h3>
                 <p class="small mb-0"><i class="far fa-star fa-lg"></i> <span class="mx-2">|</span>
-                <strong> {ticket.title} {ticket.description}</strong></p>
+                <strong> {ticket.description}</strong></p>
                 <div class="d-flex justify-content-start align-items-center">
                 <p class="mb-0 text-uppercase"><i class="fas fa-cog me-2"></i>
                 <span class="text-muted small"> Priority: <strong>{ticket.priority}</strong></span></p>

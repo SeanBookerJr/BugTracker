@@ -19,14 +19,14 @@ const filteredProjects = user.projects?.filter(singleProj => singleProj.title.to
   return (
     <div>
       <Navbar />
-            <div class="input-group mb-2 justify-content-center">
+            <div class="input-group mb-2 justify-content-center mt-5">
               <div class="form-outline">
-                <input onChange={handleQuery} placeholder='Search...' type="search" id="form1" class="form-control h-75" />
+                <input onChange={handleQuery} placeholder='Search...' type="search" id="form1" class="form-control h-50 mt-5" />
                 <label class="form-label" for="form1"></label>
               </div>
               <CreateProjectModal />
            </div>
-      <div class="container h-100 border">
+      <div class="container border">
       <h1 className='mx-auto h3 pb-3'>{user.first_name}'s Projects</h1>
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-xl-10 row ">

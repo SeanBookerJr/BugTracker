@@ -21,8 +21,8 @@ function UserTickets({user}) {
   return (
     <div>
     <Navbar />
-          <div class="input-group mb-2 justify-content-center">
-            <div class="form-outline">
+          <div class="input-group mb-2 justify-content-center mt-5">
+            <div class="form-outline mt-5">
               <input onChange={handleQuery} placeholder='Search...' type="search" id="form1" class="form-control" />
               <label class="form-label" for="form1"></label>
             </div>
