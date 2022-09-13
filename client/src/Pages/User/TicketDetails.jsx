@@ -21,7 +21,7 @@ function TicketDetails({user}) {
             })
          }, [])
 
-         console.log(ticket.comments);
+         console.log(ticket);
 
          function handleNewComment(e) {
              e.preventDefault()
@@ -57,8 +57,8 @@ function TicketDetails({user}) {
     <div>
         <Navbar />
         <div className='container'>
-            <div className='row pt-4'>
-                <div className='card mx-auto shadow' style={{width: 600}}>
+            <div className='row pt-4 mt-5'>
+                <div className='card mx-auto shadow mt-5' style={{width: 600}}>
                     <div className='card-header'><strong>Ticket Details</strong></div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item pb-4"><strong>Title:</strong> {ticket.title}</li>
@@ -68,14 +68,15 @@ function TicketDetails({user}) {
                         <li class="list-group-item pb-4"><strong>Type of Bug:</strong> {ticket.type_of}</li>
                     </ul>
                 </div>
-                <div className='card mx-auto shadow' style={{width: 600}}>
+                <div className='card mx-auto shadow mt-5' style={{width: 600}}>
                     <div className='card-header'>
                        <strong>Ticket Comments</strong>
+                       <strong className='float-right'>Time Created</strong>
                     </div>
                     <ul class="list-group list-group-flush">
                         {ticket.comments?.map(c => {
                             return(
-                                <li class="list-group-item pb-4"><strong>{user.first_name}</strong> {c.message}</li>
+                                <li class="list-group-item pb-4"><strong>{user.first_name}</strong> {c.message} <p className='float-right'>{c.created_at}</p></li>
                             )})}
                     </ul>
                     <form onSubmit={handleNewComment} className='form-group w-75 mt-3'>
@@ -87,9 +88,10 @@ function TicketDetails({user}) {
                  <div className='card mx-auto shadow mt-5 mb-4' style={{width: 600}}>
                  <ul class="list-group list-group-flush">
                     <div className='card-header'><strong>Ticket History</strong></div>
-                        <li class="list-group-item pb-4"><strong>Time created / updated : </strong></li>
-                        <li class="list-group-item pb-4"><strong>Personel assigned :</strong></li>
-                        <li class="list-group-item pb-4"><strong>Property :</strong></li>
+                        <li class="list-group-item pb-4"><strong>Time created : </strong>{ticket.created_at}</li>
+                        <li class="list-group-item pb-4"><strong>Time updated : </strong> {ticket.updated_at}</li>
+                        <li class="list-group-item pb-4"><strong>Personnel :</strong></li>
+                        <li class="list-group-item pb-4"><strong>Status :</strong> {ticket.status}</li>
                    </ul>   
                     </div>
             </div>

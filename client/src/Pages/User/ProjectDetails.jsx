@@ -6,6 +6,7 @@ import MiniTicket from './MiniTicket';
 import TicketList from './TicketList';
 import { Pagination } from '../../components/Pagination';
 import EditProject from './EditProject';
+import NewTicketModal from './NewTicketModal';
 
 function ProjectDetails({user}) {
   let navigate = useNavigate()
@@ -41,26 +42,30 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
 
   return (
-    <div className='conatiner'>
+    <div className='container mt-5'>
       <Navbar />
       <div className='row pt-4'>
-      <div class="card w-50 mx-auto h-50">
+      <div class="card w-50 mx-auto h-50 mt-5">
         <div class="card-header">
-          Project Details
+          <strong>Project Details</strong>
          </div>
             <div class="card-body">
               <h5 class="card-title"></h5>
-              <p class="card-text"><strong>Title: </strong>{proj.title}</p>
-              <p><strong>Description: </strong>{proj.description}</p>          
-                  <p><strong>Manager: </strong>{man.first_name} {man.last_name}</p>
+              <p class="card-text mb-2"><strong>Title: </strong>{proj.title}</p>
+              <p class="card-text mb-2"><strong>Description : </strong>{proj.description}</p>          
+                  <p class="card-text mb-2"><strong>Assigned Manager : </strong>{man.first_name} {man.last_name}</p>
+                  <p class="card-text mb-2"><strong>Created : </strong>{proj.created_at}</p>
+                  <p class="card-text mb-2"><strong>Last Updated :</strong>{proj.updated_at}</p>
                   
               {/* <button class="btn btn-primary btn-sm mt-3 float-right"style={{width: 100}}>Edit</button> */}
               <EditProject params={params}/>
+              <NewTicketModal params={params}/>
          </div>
       </div>
-      <div class="card mb-5 mx-auto h-25" style={{width: 400}}>
+      <div class="card mb-5 mx-auto h-25 mt-5" style={{width: 400}}>
               <div class="card-header">
-                All {proj.title}'s Tickets
+                <strong>All {proj.title}'s Tickets</strong>
+                <p className='float-right'><strong>Priority</strong></p>
               </div>
               <ul class="list-group list-group-flush pagination p-3">
                 {currentPosts?.map(t => {

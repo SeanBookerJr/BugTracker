@@ -19,7 +19,7 @@ function UserProfile({user, setUser}) {
   return (
     <div>
         <Navbar />
-        <div class="row"> 
+        <div class="row mt-5"> 
              <div class="col-lg-4 mx-auto pt-5">
                  <div class="card mb-4"> 
                      <div class="card-body text-center"> 

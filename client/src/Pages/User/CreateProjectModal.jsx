@@ -50,7 +50,7 @@ function CreateProjectModal() {
 
   return (
     <div>
-        <Button className='btn btn-outline-primary ms-5 h-75' style={{width: 150}} onClick={handleShow}>
+        <Button className='btn btn-outline-primary ms-5 h-50 mt-5' style={{width: 150}} onClick={handleShow}>
                 <p>Add Project</p>
         </Button>
 

@@ -5,10 +5,20 @@ import Navbar from '../../components/Navbar';
 import Piechart from '../../components/Piechart';
 import TicketsbyStatus from '../../components/TicketsbyStatus';
 import TicketsbyType from '../../components/TicketsbyType';
+import { DashboardPagination } from '../../components/DashboardPagination';
+
 
 
 
 function UserDashboard({user}) {
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(5)
+
+  const indexOfLastPost = currentPage * postsPerPage
+const indexOfFirstPost = indexOfLastPost - postsPerPage
+const currentPosts = user.tickets?.slice(indexOfFirstPost, indexOfLastPost)
+
+const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
 
   let navigate = useNavigate()
@@ -17,7 +27,7 @@ function UserDashboard({user}) {
 
   
   return (
-    <div className='conatiner w-100 pb-5'>
+    <div className='conatiner w-100 pb-5 mt-5'>
       <Navbar />
      <h1 className='pb-3 display-6'> {user.first_name}'s Dashboard </h1> 
       <div class="row d-flex mx-auto h-100 border" style={{width: 1000}}>
@@ -45,6 +55,22 @@ function UserDashboard({user}) {
       </div>
     </div>
   </div>
+  <div class="col-sm-6 p-5">
+    <div class="card shadow">
+      <div class="card-body">
+        <h5 class="card-title"><strong>All Tickets</strong></h5>
+        <ul class="list-group list-group-flush pagination p-3">
+          {currentPosts?.map(t => {
+            return(
+              <li class="list-group-item"><strong>{t.title}</strong> <p className='float-right'> {t.status}</p></li>
+          )})}
+        </ul>
+        <DashboardPagination postsPerPage={postsPerPage} totalPosts={user.tickets?.length} paginate={paginate}/>
+        {/* {user && <TicketsbyStatus user={user}/>} */}
+      </div>
+    </div>
+  </div>
+
   </div>
 </div>
   )
