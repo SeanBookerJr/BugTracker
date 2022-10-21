@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from '../../components/Navbar'
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
+import DevNavBar from '../../components/DevNavBar';
 
 function DevTicketDetails({user}) {
 
@@ -11,6 +11,7 @@ function DevTicketDetails({user}) {
         const [message, setMessage] = useState('')
         const [errors, setErrors] = useState('')
         const [newStatus, setNewStatus] = useState('')
+        const [userMan, setUserMan] = useState([])
         const reload=()=>window.location.reload();
 
         useEffect(() => {
@@ -19,10 +20,11 @@ function DevTicketDetails({user}) {
             .then(data => {
               console.log(data);
              setTicket(data)
+             setUserMan(data.user)
             })
          }, [])
 
-         console.log(ticket.manager);
+         console.log(userMan.manager);
 
          function handleNewComment(e) {
              e.preventDefault()
@@ -82,19 +84,20 @@ function DevTicketDetails({user}) {
 
          const handleStatusChange = e => setNewStatus(e.target.value)
 
+
   return (
     <div>
-        <Navbar />
+        <DevNavBar />
         <div className='container'>
             <div className='row pt-4 mt-5'>
                 <div className='card mx-auto shadow mt-5' style={{width: 600}}>
                     <div className='card-header'><strong>Ticket Details</strong></div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item pb-4"><strong>Title:</strong> {ticket.title}</li>
-                        <li class="list-group-item pb-4"><strong>Description:</strong> {ticket.description}</li>
-                        <li class="list-group-item pb-4"><strong>Priority:</strong> {ticket.priority}</li>
-                        <li class="list-group-item pb-4"><strong>status:</strong> {ticket.status}</li>
-                        <li class="list-group-item pb-4"><strong>Type of Bug:</strong> {ticket.type_of}</li>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item pb-4"><strong>Title:</strong> {ticket.title}</li>
+                        <li className="list-group-item pb-4"><strong>Description:</strong> {ticket.description}</li>
+                        <li className="list-group-item pb-4"><strong>Priority:</strong> {ticket.priority}</li>
+                        <li className="list-group-item pb-4"><strong>status:</strong> {ticket.status}</li>
+                        <li className="list-group-item pb-4"><strong>Type of Bug:</strong> {ticket.type_of}</li>
                         <form onSubmit={handleNewStatus} className='form-group w-75 mt-3'>
                             <p>Update Status</p>
                             <select onChange={handleStatusChange} value={newStatus} className='border rounded w-50 mb-4' type="search">
@@ -111,10 +114,10 @@ function DevTicketDetails({user}) {
                        <strong>Ticket Comments</strong>
                        <strong className='float-right'>Time Created</strong>
                     </div>
-                    <ul class="list-group list-group-flush">
+                    <ul className="list-group list-group-flush">
                         {ticket.comments?.map(c => {
                             return(
-                                <li class="list-group-item pb-4"><strong>{user.first_name} ({user.account_type})</strong> {c.message} <p className='float-right'>{c.created_at}</p></li>
+                                <li className="list-group-item pb-4"><strong>{user.first_name} ({user.account_type})</strong> {c.message} <p className='float-right'>{c.created_at}</p></li>
                             )})}
                     </ul>
                     <form onSubmit={handleNewComment} className='form-group w-75 mt-3'>
@@ -124,12 +127,11 @@ function DevTicketDetails({user}) {
                         </form>
                  </div>
                  <div className='card mx-auto shadow mt-5 mb-4' style={{width: 600}}>
-                 <ul class="list-group list-group-flush">
+                 <ul className="list-group list-group-flush">
                     <div className='card-header'><strong>Ticket History</strong></div>
-                        <li class="list-group-item pb-4"><strong>Time created : </strong>{ticket.created_at}</li>
-                        <li class="list-group-item pb-4"><strong>Time updated : </strong> {ticket.updated_at}</li>
-                        <li class="list-group-item pb-4"><strong>Personnel :</strong></li>
-                        <li class="list-group-item pb-4"><strong>Status :</strong> {ticket.status}</li>
+                        <li className="list-group-item pb-4"><strong>Time created : </strong>{ticket.created_at}</li>
+                        <li className="list-group-item pb-4"><strong>Time updated : </strong> {ticket.updated_at}</li>
+                        <li className="list-group-item pb-4"><strong>Status :</strong> {ticket.status}</li>
                    </ul>   
                     </div>
             </div>

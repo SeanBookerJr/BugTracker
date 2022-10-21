@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy, :details]
-  skip_before_action :authorize, only: [:create, :show, :details]
+  skip_before_action :authorize, only: [:create, :show, :details, :update, :destroy]
 
   # GET /tickets or /tickets.json
   def index
@@ -29,7 +29,7 @@ class TicketsController < ApplicationController
 
     if @user.nil?
       @user = current_user
-      @project.user = @user
+      @ticket.user = @user
     end
 
     if @ticket.save
@@ -41,30 +41,18 @@ class TicketsController < ApplicationController
 
   def details
     render json: @ticket
-    
   end
 
   # PATCH/PUT /tickets/1 or /tickets/1.json
   def update
-    respond_to do |format|
-      if @ticket.update(ticket_params)
-        format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully updated." }
-        format.json { render :show, status: :ok, location: @ticket }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
-      end
-    end
+    @ticket.update(ticket_params)
+    render json: @ticket
   end
 
   # DELETE /tickets/1 or /tickets/1.json
   def destroy
     @ticket.destroy
-
-    respond_to do |format|
-      format.html { redirect_to tickets_url, notice: "Ticket was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private
@@ -75,6 +63,6 @@ class TicketsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ticket_params
-      params.permit(:title, :type, :priority, :description, :status, :user_id, :developer_id, :manager_id, :admin_id, :project_id)
+      params.permit(:title, :type_of, :status, :priority, :description, :user_id, :developer_id, :manager_id, :admin_id, :project_id)
     end
 end

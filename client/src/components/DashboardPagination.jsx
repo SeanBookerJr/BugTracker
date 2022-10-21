@@ -10,7 +10,7 @@ export const DashboardPagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   return (
     <nav>
-        <ul className='pagination p-2'>
+        <ul className='pagination p-2 d-flex align-content-start flex-wrap'>
             {pageNumbers?.map(number => (
                 <li key={number} className="page-item">
                     <p onClick={() => paginate(number)}  className='page-link'>

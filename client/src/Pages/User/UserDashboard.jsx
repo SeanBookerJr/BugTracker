@@ -30,39 +30,39 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
     <div className='conatiner w-100 pb-5 mt-5'>
       <Navbar />
      <h1 className='pb-3 display-6'> {user.first_name}'s Dashboard </h1> 
-      <div class="row d-flex mx-auto h-100 border" style={{width: 1000}}>
-  <div class="col-sm-6 p-5">
-    <div class="card shadow">
-      <div class="card-body">
-        <h5 class="card-title"><strong>Tickets by Type</strong></h5>
+      <div className="row d-flex mx-auto h-100 border" style={{width: 1000}}>
+  <div className="col-sm-6 p-5">
+    <div className="card shadow">
+      <div className="card-body">
+        <h5 className="card-title"><strong>Tickets by Type</strong></h5>
        {user && <TicketsbyType user={user}/>}
       </div>
     </div>
   </div>
-  <div class="col-sm-6 p-5 ">
-    <div class="card shadow">
-      <div class="card-body">
-        <h5 class="card-title"><strong>Tickets by priority</strong></h5>
+  <div className="col-sm-6 p-5 ">
+    <div className="card shadow">
+      <div className="card-body">
+        <h5 className="card-title"><strong>Tickets by priority</strong></h5>
         {user &&  <Piechart user={user}/>}
       </div>
     </div>
   </div>
-  <div class="col-sm-6 p-5">
-    <div class="card shadow">
-      <div class="card-body">
-        <h5 class="card-title"><strong>Tickets by Status</strong></h5>
+  <div className="col-sm-6 p-5">
+    <div className="card shadow">
+      <div className="card-body">
+        <h5 className="card-title"><strong>Tickets by Status</strong></h5>
         {user && <TicketsbyStatus user={user}/>}
       </div>
     </div>
   </div>
-  <div class="col-sm-6 p-5">
-    <div class="card shadow">
-      <div class="card-body">
-        <h5 class="card-title"><strong>All Tickets</strong></h5>
-        <ul class="list-group list-group-flush pagination p-3">
+  <div className="col-sm-6 p-5">
+    <div className="card shadow">
+      <div className="card-body">
+        <h5 className="card-title"><strong>All Tickets</strong></h5>
+        <ul className="list-group list-group-flush pagination p-3">
           {currentPosts?.map(t => {
             return(
-              <li class="list-group-item"><strong>{t.title}</strong> <p className='float-right'> {t.status}</p></li>
+              <li className="list-group-item"><strong>{t.title}</strong> <p className='float-right'> {t.status}</p></li>
           )})}
         </ul>
         <DashboardPagination postsPerPage={postsPerPage} totalPosts={user.tickets?.length} paginate={paginate}/>

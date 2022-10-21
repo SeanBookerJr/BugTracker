@@ -60,12 +60,12 @@ function TicketDetails({user}) {
             <div className='row pt-4 mt-5'>
                 <div className='card mx-auto shadow mt-5' style={{width: 600}}>
                     <div className='card-header'><strong>Ticket Details</strong></div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item pb-4"><strong>Title:</strong> {ticket.title}</li>
-                        <li class="list-group-item pb-4"><strong>Description:</strong> {ticket.description}</li>
-                        <li class="list-group-item pb-4"><strong>Priority:</strong> {ticket.priority}</li>
-                        <li class="list-group-item pb-4"><strong>status:</strong> {ticket.status}</li>
-                        <li class="list-group-item pb-4"><strong>Type of Bug:</strong> {ticket.type_of}</li>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item pb-4"><strong>Title:</strong> {ticket.title}</li>
+                        <li className="list-group-item pb-4"><strong>Description:</strong> {ticket.description}</li>
+                        <li className="list-group-item pb-4"><strong>Priority:</strong> {ticket.priority}</li>
+                        <li className="list-group-item pb-4"><strong>status:</strong> {ticket.status}</li>
+                        <li className="list-group-item pb-4"><strong>Type of Bug:</strong> {ticket.type_of}</li>
                     </ul>
                 </div>
                 <div className='card mx-auto shadow mt-5' style={{width: 600}}>
@@ -73,10 +73,10 @@ function TicketDetails({user}) {
                        <strong>Ticket Comments</strong>
                        <strong className='float-right'>Time Created</strong>
                     </div>
-                    <ul class="list-group list-group-flush">
+                    <ul className="list-group list-group-flush">
                         {ticket.comments?.map(c => {
                             return(
-                                <li class="list-group-item pb-4"><strong>{user.first_name}</strong> {c.message} <p className='float-right'>{c.created_at}</p></li>
+                                <li className="list-group-item pb-4"><strong>{user.first_name}</strong> {c.message} <p className='float-right'>{c.created_at}</p></li>
                             )})}
                     </ul>
                     <form onSubmit={handleNewComment} className='form-group w-75 mt-3'>
@@ -86,12 +86,11 @@ function TicketDetails({user}) {
                         </form>
                  </div>
                  <div className='card mx-auto shadow mt-5 mb-4' style={{width: 600}}>
-                 <ul class="list-group list-group-flush">
+                 <ul className="list-group list-group-flush">
                     <div className='card-header'><strong>Ticket History</strong></div>
-                        <li class="list-group-item pb-4"><strong>Time created : </strong>{ticket.created_at}</li>
-                        <li class="list-group-item pb-4"><strong>Time updated : </strong> {ticket.updated_at}</li>
-                        <li class="list-group-item pb-4"><strong>Personnel :</strong></li>
-                        <li class="list-group-item pb-4"><strong>Status :</strong> {ticket.status}</li>
+                        <li className="list-group-item pb-4"><strong>Time created : </strong>{ticket.created_at}</li>
+                        <li className="list-group-item pb-4"><strong>Time updated : </strong> {ticket.updated_at}</li>
+                        <li className="list-group-item pb-4"><strong>Status :</strong> {ticket.status}</li>
                    </ul>   
                     </div>
             </div>

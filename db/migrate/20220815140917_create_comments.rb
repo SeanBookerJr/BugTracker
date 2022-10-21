@@ -3,6 +3,9 @@ class CreateComments < ActiveRecord::Migration[7.0]
     create_table :comments do |t|
       t.text :message
       t.integer :user_id
+      t.integer :developer_id
+      t.integer :manager_id
+      t.integer :admin_id
       t.integer :ticket_id
       t.integer :commentable_id
       t.string :commentable_type

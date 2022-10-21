@@ -73,22 +73,23 @@ function NewTicketModal({params}) {
 <Modal.Title>Create Ticket</Modal.Title>
 </Modal.Header>
 <Modal.Body>
-<div>
+<div className='container border p-4'>
+    <div className='d-flex flex-column'>
    <form onSubmit={handleNewTicket}>
-       <label className='form-label'></label>
-       <input onChange={handleTitleChange} type="text" className='modal-edit-control me-3 border border-dark rounded'
+       <label className='form-label p-4 ms-5'><strong>Title</strong></label>
+       <input onChange={handleTitleChange} type="text" className='modal-edit-control border border-dark rounded me-5 ms-4'
        placeholder='Title'
        value={title} required>
        </input>
 
-       <label className='form-label'></label>
-       <input onChange={handleDescripChange} type="text" className='modal-edit-control border border-dark rounded'
+       <label className='form-label p-4 ms-4'><strong>Description</strong></label>
+       <input onChange={handleDescripChange} type="text" className='modal-edit-control border border-dark rounded me-5'
        placeholder='Description'
        value={descrip} required>
        </input>
 
-       <label className='form-label'></label>
-       <select onChange={handleTypeOfChange} type="text" className='form-select-sm mt-3 border' style={{width: 150}}
+       <label className='form-label p-4'><strong>Type of Bug</strong></label>
+       <select onChange={handleTypeOfChange} type="text" className='form-select-sm mt-3 border me-5' style={{width: 150}}
        placeholder='Type of Bug'
        value={typeOf} required>
            <option>Performance</option>
@@ -99,7 +100,7 @@ function NewTicketModal({params}) {
            <option>Compatability</option>
        </select>
 
-       <label className='form-label'></label>
+       <label className='form-label p-4'><strong>Priority</strong></label>
        <select onChange={handlePriorityChange} type="text" className='form-select-sm mb-3 border' style={{width: 150}}
        placeholder='priority'
        value={priority} required>
@@ -110,6 +111,7 @@ function NewTicketModal({params}) {
 
        <button className='btn btn-outline-primary mt-2 h-75' type='submit'>Confirm Ticket</button>
    </form>
+   </div>
 </div>
 </Modal.Body>
 </Modal>

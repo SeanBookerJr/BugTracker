@@ -44,29 +44,30 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
     <div><div className='container mt-5'>
     <DevNavBar />
     <div className='row pt-4'>
-    <div class="card w-50 mx-auto h-50 mt-5">
-      <div class="card-header">
+    <div className="card w-50 mx-auto h-50 mt-5">
+      <div className="card-header">
         <strong>Project Details</strong>
        </div>
-          <div class="card-body">
-            <h5 class="card-title"></h5>
-            <p class="card-text mb-2"><strong>Title: </strong>{proj.title}</p>
-            <p class="card-text mb-2"><strong>Description : </strong>{proj.description}</p>          
-                <p class="card-text mb-2"><strong>Assigned Manager : </strong>{man.first_name} {man.last_name}</p>
-                <p class="card-text mb-2"><strong>Created : </strong>{proj.created_at}</p>
-                <p class="card-text mb-2"><strong>Last Updated :</strong>{proj.updated_at}</p>
+          <div className="card-body">
+            <h5 className="card-title"></h5>
+            <p className="card-text mb-2"><strong>Title: </strong>{proj.title}</p>
+            <p className="card-text mb-2"><strong>Description : </strong>{proj.description}</p>          
+                <p className="card-text mb-2"><strong>Assigned Manager : </strong>{man.first_name} {man.last_name}</p>
+                <p className="card-text mb-2"><strong>Customer : </strong>{proj.user.first_name} {proj.user.last_name}</p>
+                <p className="card-text mb-2"><strong>Created : </strong>{proj.created_at}</p>
+                <p className="card-text mb-2"><strong>Last Updated :</strong>{proj.updated_at}</p>
                 
-            {/* <button class="btn btn-primary btn-sm mt-3 float-right"style={{width: 100}}>Edit</button> */}
+            {/* <button className="btn btn-primary btn-sm mt-3 float-right"style={{width: 100}}>Edit</button> */}
             <EditProject params={params}/>
             <NewTicketModal params={params}/>
        </div>
     </div>
-    <div class="card mb-5 mx-auto h-25 mt-5" style={{width: 400}}>
-            <div class="card-header">
+    <div className="card mb-5 mx-auto h-25 mt-5" style={{width: 400}}>
+            <div className="card-header">
               <strong>All {proj.title}'s Tickets</strong>
               <p className='float-right'><strong>Priority</strong></p>
             </div>
-            <ul class="list-group list-group-flush pagination p-3">
+            <ul className="list-group list-group-flush pagination p-3">
               {currentPosts?.map(t => {
                   return(
                 <TicketList key={t.id} t={t} />
@@ -75,11 +76,11 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
             <Pagination postsPerPage={postsPerPage} totalPosts={tickets.length} paginate={paginate}/>
           </div>
           </div>
-    <div  class="container py-5 h-100 border mt-1">
+    <div  className="container py-5 h-100 border mt-1">
       <div>
       </div>
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-xl-10 row ">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col col-xl-10 row ">
               {proj.tickets?.map(ticket => 
                 <DevMiniTicket key={ticket.id} ticket={ticket}/>)}
             </div>
