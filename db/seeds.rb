@@ -32,11 +32,11 @@ PROJECT_ITER.times do
 end
 
 TICKET_ITER.times do
-    Ticket.create!(title: Faker::App.name, type_of: ["performance", "security", "functional", "usability", "syntax", "compatability"].to_a.sample, priority: ["low", "medium", "high"].to_a.sample, description: Faker::Lorem.sentences(number: 2), status: ["open", "resolved", "in-progress"].to_a.sample, user_id: Faker::Number.within(range: 1..100), project_id: Faker::Number.within(range: 1..600))
+    Ticket.create!(title: Faker::App.name, type_of: ["performance", "security", "functional", "usability", "syntax", "compatability"].to_a.sample, priority: ["low", "medium", "high"].to_a.sample, description: Faker::Lorem.sentences(number: 2), status: ["open", "resolved", "in-progress"].to_a.sample, user_id: Faker::Number.within(range: 1..100), project_id: Faker::Number.within(range: 1..600), developer_id: Faker::Number.within(range: 1..50))
 end
 
 COMMENT_ITER.times do
-    Comment.create!(message: Faker::Lorem.sentences(number: 1), user_id: Faker::Number.within(range: 1..100), ticket_id: Faker::Number.within(range: 1..1200), commentable_id: Faker::Number.within(range: 1..180), commentable_type: ["Admin", "Manager", "Developer", "User"].to_a.sample)
+    Comment.create!(message: Faker::Lorem.sentences(number: 1), ticket_id: Faker::Number.within(range: 1..1200), commentable_id: Faker::Number.within(range: 1..100), commentable_type: ["Admin", "Manager", "Developer", "User"].to_a.sample)
 end
 
 puts "seeding finished"

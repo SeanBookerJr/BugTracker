@@ -12,8 +12,8 @@ function TicketSend({ticket}) {
   console.log(ticket);
   return (
     <div>
-         <button onClick={handleButtonCLick} style={{width: 50}} type="button" class="btn btn-outline-dark btn-sm btn-floating float-right">
-              <i class="fas fa-plus"></i> View
+         <button onClick={handleButtonCLick} style={{width: 50}} type="button" className="btn btn-outline-dark btn-sm btn-floating float-right">
+              <i className="fas fa-plus"></i> View
             </button>
     </div>
   )

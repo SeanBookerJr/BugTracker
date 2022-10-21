@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :get_tickets]
-  skip_before_action :authorize, only: [:create, :get_tickets, :update]
+  skip_before_action :authorize, only: [:create, :get_tickets, :update, :destroy]
 
   # GET /projects or /projects.json
   def index
@@ -58,11 +58,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1 or /projects/1.json
   def destroy
     @project.destroy
-
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    head :no_content
   end
 
   private

@@ -1,5 +1,7 @@
 class Manager < ApplicationRecord
     has_secure_password
+
+    belongs_to :admin, optional: true
     
     has_many :developers
     has_many :users
@@ -7,5 +9,4 @@ class Manager < ApplicationRecord
     has_many :tickets, through: :users
     has_many :comments, as: :commentable
 
-    belongs_to :admin, optional: true
 end

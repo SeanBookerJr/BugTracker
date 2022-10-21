@@ -7,10 +7,12 @@ import TicketsbyStatus from '../../components/TicketsbyStatus';
 import TicketsbyType from '../../components/TicketsbyType';
 import { DashboardPagination } from '../../components/DashboardPagination';
 
-function DeveloperDashboard({user}) {
+function DeveloperDashboard() {
+  const user = JSON.parse(localStorage.getItem("user"))
 
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setPostsPerPage] = useState(5)
+  
 
   const indexOfLastPost = currentPage * postsPerPage
 const indexOfFirstPost = indexOfLastPost - postsPerPage
@@ -21,19 +23,14 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   let navigate = useNavigate()
 
-  console.log(user.tickets);
-
-  console.log(user);
-
-  const manFirst = user.manager.first_name
-  const manLast = user.manager.last_name
+  const manName = user.first_name + " " + user.last_name
 
   return (
     <div>
        <div className='conatiner w-100 pb-5 mt-5'>
       <DevNavBar />
      <h1 className='mb-1 display-6'> {user.first_name}'s Dashboard </h1> 
-     <h1 className='mb-2'><strong> Your Manager : {manFirst} {manLast} </strong></h1>
+     <h1 className='mb-2'><strong> Your Manager : {manName} </strong></h1>
       <div class="row d-flex mx-auto h-100 border" style={{width: 1000}}>
   <div class="col-sm-6 p-5">
     <div class="card shadow">

@@ -1,6 +1,6 @@
 class ManagersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:create]
+  skip_before_action :authorize, only: [:create, :update]
 
   # GET /managers or /managers.json
   def index
@@ -42,15 +42,8 @@ class ManagersController < ApplicationController
 
   # PATCH/PUT /managers/1 or /managers/1.json
   def update
-    respond_to do |format|
-      if @manager.update(manager_params)
-        format.html { redirect_to manager_url(@manager), notice: "Manager was successfully updated." }
-        format.json { render :show, status: :ok, location: @manager }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @manager.errors, status: :unprocessable_entity }
-      end
-    end
+    @user.update(manager_params)
+    render json: @manager
   end
 
   # DELETE /managers/1 or /managers/1.json
