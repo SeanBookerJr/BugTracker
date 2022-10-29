@@ -1,14 +1,20 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+<<<<<<< HEAD
 function ManMiniTicket({ticket, setTickets, params}) {
     let navigate = useNavigate()
     const reload=()=>window.location.reload();
 
+=======
+function ManMiniTicket({ticket}) {
+    let navigate = useNavigate()
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
 
     function handleButtonCLick() {
        navigate(`/ManTicketDetails/${ticket.id}`)
     }
+<<<<<<< HEAD
 
     function handleUpdatedTickets(e) {
       fetch(`/project/alltickets/${params.id}`)
@@ -41,6 +47,8 @@ function ManMiniTicket({ticket, setTickets, params}) {
        handleUpdatedTickets()
     }
 
+=======
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
   return (
     <div className="card mb-4 mx-auto shadow p-3 bg-white rounded" style={{width: 450}} >
     <div className="card-body p-4">
@@ -56,7 +64,10 @@ function ManMiniTicket({ticket, setTickets, params}) {
         <button onClick={handleButtonCLick} style={{width: 100}}  type="button" className="btn btn-outline-dark btn-sm float-right">
             <i className="fas fa-plus"></i> Details
          </button>
+<<<<<<< HEAD
          <button onClick={handleDeleteStuff} className="btn btn-outline-dark btn-sm float-right mr-2" style={{width: 100}}>Delete</button>
+=======
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
     </div>
  </div>
   )

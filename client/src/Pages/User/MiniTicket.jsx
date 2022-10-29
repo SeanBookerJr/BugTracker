@@ -1,7 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+<<<<<<< HEAD
 function MiniTicket({ticket, params, setTickets}) {
+=======
+function MiniTicket({ticket}) {
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
 
    let navigate = useNavigate()
 
@@ -11,18 +15,31 @@ function MiniTicket({ticket, params, setTickets}) {
       navigate(`/TicketDetails/${ticket.id}`)
    }
 
+<<<<<<< HEAD
    function deleteTicketClick(e){
       fetch(`/tickets/${ticket.id}`, {
+=======
+   function handleDelete(e) {
+      e.preventDefault()
+
+         fetch(`/tickets/${ticket.id}`, {
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
          method: 'DELETE',
          headers: {
             'Content-type':'application/json'
          }
+<<<<<<< HEAD
        })
        .then(res => {
+=======
+      })
+      .then(res => {
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
          if (res.ok) {
              res.json()
              .then(data => {
                 console.log(data);
+<<<<<<< HEAD
              })
          }
      })
@@ -40,6 +57,13 @@ function MiniTicket({ticket, params, setTickets}) {
     function handleDeleteStuff(e) {
       deleteTicketClick()
       handleUpdatedTickets()
+=======
+                 reload()
+             })
+         }
+     })
+
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
    }
 
   return (
@@ -57,7 +81,11 @@ function MiniTicket({ticket, params, setTickets}) {
                 <button onClick={handleButtonCLick} style={{width: 100}}  type="button" className="btn btn-outline-dark btn-sm float-right">
                     <i className="fas fa-plus"></i> Details
                  </button>
+<<<<<<< HEAD
                  <button onClick={handleDeleteStuff} type="button" className="btn btn-outline-dark btn-sm float-right w-25 me-2"><i className="fas fa-plus"></i>Delete</button>
+=======
+                 <button onClick={handleDelete} type="button" className="btn btn-outline-dark btn-sm float-right w-25 me-2"><i className="fas fa-plus"></i>Delete</button>
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
             </div>
          </div>
   )

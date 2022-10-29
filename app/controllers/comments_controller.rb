@@ -26,7 +26,6 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-
     @comment = Comment.create!(comment_params)
 
     if @comment.save

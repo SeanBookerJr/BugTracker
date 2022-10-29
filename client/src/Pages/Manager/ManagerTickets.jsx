@@ -4,8 +4,12 @@ import ManNavBar from '../../components/ManNavBar';
 import { useNavigate } from 'react-router-dom';
 import ManTicketSend from './ManTicketSend';
 
+<<<<<<< HEAD
 function ManagerTickets() {
   const user = JSON.parse(localStorage.getItem("user"))
+=======
+function ManagerTickets({user}) {
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
   const [query, setQuery] = useState("")
 
   const filteredTickets = user.tickets?.filter(singleProj => singleProj.title.toLowerCase().includes(query.toLowerCase()))
@@ -14,8 +18,11 @@ function ManagerTickets() {
     setQuery(e.target.value)
   }
 
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
   console.log(user);
 
   return (

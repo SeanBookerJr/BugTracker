@@ -5,7 +5,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import TicketList from '../User/TicketList';
 import { Pagination } from '../../components/Pagination';
 import EditProject from '../User/EditProject';
+<<<<<<< HEAD
 import ManNewTicketModal from './ManNewTicketModal';
+=======
+import NewTicketModal from '../User/NewTicketModal';
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
 import ManMiniTicket from './ManMiniTicket';
 
 function ManProjectDetails() {
@@ -18,7 +22,10 @@ function ManProjectDetails() {
   const [tickets, setTickets] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setPostsPerPage] = useState(5)
+<<<<<<< HEAD
   const reload=()=>window.location.reload();
+=======
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
 
  
 
@@ -46,8 +53,11 @@ const currentPosts = tickets?.slice(indexOfFirstPost, indexOfLastPost)
 
 const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
+<<<<<<< HEAD
 console.log(tickets);
 
+=======
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
   return (
     <div><div className='container mt-5'>
     <ManNavBar />
@@ -67,7 +77,11 @@ console.log(tickets);
                 
             {/* <button className="btn btn-primary btn-sm mt-3 float-right"style={{width: 100}}>Edit</button> */}
             <EditProject params={params}/>
+<<<<<<< HEAD
             <ManNewTicketModal man={man} params={params}/>
+=======
+            <NewTicketModal params={params}/>
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
        </div>
     </div>
     <div className="card mb-5 mx-auto h-25 mt-5" style={{width: 400}}>
@@ -89,8 +103,13 @@ console.log(tickets);
       </div>
         <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-xl-10 row ">
+<<<<<<< HEAD
               {tickets?.map(ticket => 
                 <ManMiniTicket key={ticket.id} params={params} ticket={ticket} setTickets={setTickets}/>)}
+=======
+              {proj.tickets?.map(ticket => 
+                <ManMiniTicket key={ticket.id} ticket={ticket}/>)}
+>>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
             </div>
         </div>
     </div>
