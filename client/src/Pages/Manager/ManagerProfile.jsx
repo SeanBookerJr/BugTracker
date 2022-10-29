@@ -17,11 +17,8 @@ function ManagerProfile({setUser}) {
         navigate('/')
     }
 
-<<<<<<< HEAD
     console.log(user);
 
-=======
->>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
   return (
     <div>
         <ManNavBar />
@@ -55,7 +52,6 @@ function ManagerProfile({setUser}) {
 
                              <p className="list-group-item pb-4"><strong>Account Type :</strong> {user.account_type}</p>
 
-<<<<<<< HEAD
                              <p className="list-group-item pb-4"><strong>Your Developers :</strong>
                              {user.developers?.map(d => { 
                                  return(
@@ -64,8 +60,6 @@ function ManagerProfile({setUser}) {
                              })}
                              </p>
 
-=======
->>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
                         </ul>
                  </div>
                                  

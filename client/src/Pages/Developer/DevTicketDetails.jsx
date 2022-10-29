@@ -102,11 +102,7 @@ function DevTicketDetails({user}) {
                             <p>Update Status</p>
                             <select onChange={handleStatusChange} value={newStatus} className='border rounded w-50 mb-4' type="search">
                                 <option>resolved</option>
-<<<<<<< HEAD
                                 <option>ongoing</option>
-=======
-                                <option>in-progress</option>
->>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
                                 <option>open</option>
                             </select>
                             <button type='submit' className='btn btn-outline-primary rounded ms-2' style={{width: 105}}>Submit</button>
