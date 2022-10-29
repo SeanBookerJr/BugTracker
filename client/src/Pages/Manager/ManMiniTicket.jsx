@@ -1,12 +1,46 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function ManMiniTicket({ticket}) {
+function ManMiniTicket({ticket, setTickets, params}) {
     let navigate = useNavigate()
+    const reload=()=>window.location.reload();
+
 
     function handleButtonCLick() {
        navigate(`/ManTicketDetails/${ticket.id}`)
     }
+
+    function handleUpdatedTickets(e) {
+      fetch(`/project/alltickets/${params.id}`)
+   .then(res => res.json())
+   .then(data => {
+    if (data) {console.log(data);
+      setTickets(data.tickets)}
+   })
+    }
+
+    function deleteTicketClick(e){
+      fetch(`/tickets/${ticket.id}`, {
+         method: 'DELETE',
+         headers: {
+            'Content-type':'application/json'
+         }
+       })
+       .then(res => {
+         if (res.ok) {
+             res.json()
+             .then(data => {
+                console.log(data);
+             })
+         }
+     })
+    }
+
+    function handleDeleteStuff(e) {
+       deleteTicketClick()
+       handleUpdatedTickets()
+    }
+
   return (
     <div className="card mb-4 mx-auto shadow p-3 bg-white rounded" style={{width: 450}} >
     <div className="card-body p-4">
@@ -22,6 +56,7 @@ function ManMiniTicket({ticket}) {
         <button onClick={handleButtonCLick} style={{width: 100}}  type="button" className="btn btn-outline-dark btn-sm float-right">
             <i className="fas fa-plus"></i> Details
          </button>
+         <button onClick={handleDeleteStuff} className="btn btn-outline-dark btn-sm float-right mr-2" style={{width: 100}}>Delete</button>
     </div>
  </div>
   )

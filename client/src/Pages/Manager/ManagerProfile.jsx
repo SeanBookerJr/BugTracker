@@ -17,6 +17,8 @@ function ManagerProfile({setUser}) {
         navigate('/')
     }
 
+    console.log(user);
+
   return (
     <div>
         <ManNavBar />
@@ -49,6 +51,14 @@ function ManagerProfile({setUser}) {
                              <p className="list-group-item pb-4"><strong>Username :</strong> {user.username}</p>
 
                              <p className="list-group-item pb-4"><strong>Account Type :</strong> {user.account_type}</p>
+
+                             <p className="list-group-item pb-4"><strong>Your Developers :</strong>
+                             {user.developers?.map(d => { 
+                                 return(
+                                        <li>ID #{d.id}: {d.first_name} {d.last_name} </li>
+                             )
+                             })}
+                             </p>
 
                         </ul>
                  </div>

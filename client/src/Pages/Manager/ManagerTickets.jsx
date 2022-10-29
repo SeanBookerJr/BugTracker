@@ -4,7 +4,8 @@ import ManNavBar from '../../components/ManNavBar';
 import { useNavigate } from 'react-router-dom';
 import ManTicketSend from './ManTicketSend';
 
-function ManagerTickets({user}) {
+function ManagerTickets() {
+  const user = JSON.parse(localStorage.getItem("user"))
   const [query, setQuery] = useState("")
 
   const filteredTickets = user.tickets?.filter(singleProj => singleProj.title.toLowerCase().includes(query.toLowerCase()))
@@ -12,6 +13,8 @@ function ManagerTickets({user}) {
   const handleQuery = e => {
     setQuery(e.target.value)
   }
+
+  
 
   console.log(user);
 

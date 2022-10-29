@@ -81,7 +81,7 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
       </div>
         <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-xl-10 row ">
-              {proj.tickets?.map(ticket => 
+              {tickets?.map(ticket => 
                 <DevMiniTicket key={ticket.id} ticket={ticket}/>)}
             </div>
         </div>

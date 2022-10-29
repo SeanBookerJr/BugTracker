@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
 
         @current_ticket ||= Ticket.find_by(id: params[:ticket_id])
     end
-
+    
     def authorize
         unless current_user
             render json: { message: 'Not authorized' }, status: 401

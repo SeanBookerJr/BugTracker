@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get '/ticket/details/:id', to: 'tickets#details'
 
+  get '/ticket/comments/:id', to: 'tickets#ticket_comments'
+
 
   # Defines the root path route ("/")
   # root "articles#index"

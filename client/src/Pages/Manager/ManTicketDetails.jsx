@@ -2,9 +2,9 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import ManNavBar from '../../components/ManNavBar';
-import DeveloperDashboard from '../Developer/DeveloperDashboard';
 
-function ManTicketDetails({user}) {
+function ManTicketDetails() {
+    const user = JSON.parse(localStorage.getItem("user"))
     let params = useParams()
 
     const [ticket, setTicket] = useState([])
@@ -12,9 +12,11 @@ function ManTicketDetails({user}) {
     const [errors, setErrors] = useState('')
     const [newStatus, setNewStatus] = useState('')
     const [newPriority, setNewPriority] = useState('')
+    const [newTypeOf, setNewTypeOf] = useState('')
     const [newDeveloper, setNewDeveloper] = useState('')
     const [ticMan, setTicMan] = useState([])
     const [ticDev, setTicDev] = useState([])
+    const [ticComments, setTicComments] = useState([])
     const reload=()=>window.location.reload();
 
     useEffect(() => {
@@ -25,10 +27,20 @@ function ManTicketDetails({user}) {
          setTicket(data)
          setTicMan(data.manager)
          setTicDev(data.developer)
+         setNewStatus(data.status)
+         setNewPriority(data.priority)
         })
      }, [])
 
-     console.log(ticDev);
+     useEffect(() => {
+        fetch(`/ticket/comments/${params.id}`)
+        .then(res => res.json())
+        .then(comments => {
+            console.log(comments)
+        setTicComments(comments)
+        })
+     }, [])
+     
 
      console.log(ticket.comments);
 
@@ -42,22 +54,22 @@ function ManTicketDetails({user}) {
         formData.append("commentable_id", user.id)
         formData.append("commentable_type", user.account_type)
         
-        fetch('/comments', {
-            method: 'POST',
-              body: formData
-            })
-            .then(res => {
-                if (res.ok) {
-                    res.json()
-                    .then(data => {
-                        console.log(data)
+            fetch('/comments', {
+                method: 'POST',
+                body: formData
+                })
+                    .then(res => {
+                        if (res.ok) {
+                            res.json()
+                            .then(data => {
+                                console.log(data)
 
+                            })
+                        } else {
+                            res.json()
+                            .then(({errors}) => setErrors(errors))
+                        }
                     })
-                } else {
-                    res.json()
-                    .then(({errors}) => setErrors(errors))
-                }
-            })
      }
 
      function handleNewStatus(e) {
@@ -83,6 +95,8 @@ function ManTicketDetails({user}) {
                 }
             })
      }
+     console.log(newStatus);
+     const statusGroup = ["open", "ongoing", "resolved"]
 
      function handleNewPriority(e) {
         e.preventDefault()
@@ -108,11 +122,11 @@ function ManTicketDetails({user}) {
             })
      }
 
-     function handleNewDeveloper(e) {
+     function handleNewTypeOf(e) {
         e.preventDefault()
 
         const formData = new FormData()
-        formData.append("developer", newDeveloper)
+        formData.append("type_of", newTypeOf)
 
         fetch(`/tickets/${params.id}`, {
             method: 'PATCH',
@@ -132,11 +146,38 @@ function ManTicketDetails({user}) {
             })
      }
 
+     const typeOfGroup = ["performance", "security", "functional", "usability", "syntax", "compatability"]
 
+     function handleNewDeveloper(e) {
+        e.preventDefault()
+
+        const formData = new FormData()
+        formData.append("developer_id", newDeveloper.slice(-2))
+
+        fetch(`/tickets/${params.id}`, {
+            method: 'PATCH',
+              body: formData
+            })
+            .then(res => {
+                if (res.ok) {
+                    res.json()
+                    .then(data => {
+                        console.log(data)
+                        reload()
+                    })
+                } else {
+                    res.json()
+                    .then(({errors}) => setErrors(errors))
+                }
+            })
+     }
      const handleCommentChange = e => setMessage(e.target.value)
      const handleStatusChange = e => setNewStatus(e.target.value)
      const handlePriorityChange = e => setNewPriority(e.target.value)
+     const handleTypeOfChange = e => setNewTypeOf(e.target.value)
      const handleDeveloperChange = e => setNewDeveloper(e.target.value)
+
+     console.log(newDeveloper.slice(-2));
 
   return (
     <div>
@@ -150,11 +191,11 @@ function ManTicketDetails({user}) {
                         <li className="list-group-item pb-4"><strong>Description:</strong> {ticket.description}</li>
                         <li className="list-group-item pb-4"><strong>Assigned Developer:</strong> {ticDev.first_name} {ticDev.last_name}
                         <form onSubmit={handleNewDeveloper} className='form-group w-75 mt-3'>
-                            <p>Update Developer</p>
-                            <select onChange={handleDeveloperChange} className='border rounded w-50 mb-4' type="search">
+                            <p>Re-assign Developer</p>
+                            <select onClick={handleDeveloperChange} className='border rounded w-50 mb-4' type="search">
                               {user.developers?.map(d => {
                                   return(
-                                    <option>{d.first_name} {d.last_name}</option>
+                                    <option>{d.first_name} {d.last_name} {d.id}</option>
                                   )
                               })}
                             </select>
@@ -165,37 +206,51 @@ function ManTicketDetails({user}) {
                         <form onSubmit={handleNewPriority} className='form-group w-75 mt-3'>
                             <p>Update Priority</p>
                             <select onChange={handlePriorityChange} className='border rounded w-50 mb-4' type="search">
-                                <option>High</option>
-                                <option>Medium</option>
-                                <option>Low</option>
+                                <option>high</option>
+                                <option>medium</option>
+                                <option>low</option>
                             </select>
                             <button type='submit' className='btn btn-outline-primary rounded ms-2' style={{width: 105}}>Submit</button>
                         </form>
                         </li>
-                        <li className="list-group-item pb-4"><strong>status:</strong> {ticket.status}
+                        <li className="list-group-item pb-4"><strong>Status:</strong> {ticket.status}
                         <form onSubmit={handleNewStatus} className='form-group w-75 mt-3'>
                             <p>Update Status</p>
                             <select onChange={handleStatusChange} value={newStatus} className='border rounded w-50 mb-4' type="search">
-                                <option>resolved</option>
-                                <option>in-progress</option>
-                                <option>open</option>
+                                {statusGroup?.map(s => {
+                                    return(
+                                        <option>{s}</option>
+                                    )
+                                })}
                             </select>
                             <button type='submit' className='btn btn-outline-primary rounded ms-2' style={{width: 105}}>Submit</button>
                         </form>
                         </li>
-                        <li className="list-group-item pb-4"><strong>Type of Bug:</strong> {ticket.type_of}</li>
+                        <li className="list-group-item pb-4"><strong>Type of Bug:</strong> {ticket.type_of}
+                        <form onSubmit={handleNewTypeOf} className='form-group w-75 mt-3'>
+                            <p>Update Bug Type</p>
+                            <select onChange={handleTypeOfChange} value={newTypeOf} className='border rounded w-50 mb-4' type="search">
+                                {typeOfGroup?.map(t => {
+                                    return(
+                                        <option>{t}</option>
+                                    )
+                                })}
+                            </select>
+                            <button type='submit' className='btn btn-outline-primary rounded ms-2' style={{width: 105}}>Submit</button>
+                        </form>
+                        </li>
                         {/* <li className="list-group-item pb-4"><strong>Assigned Developer:</strong> {ticket.developer}</li> */}
                     </ul>
                 </div>
-                <div className='card mx-auto shadow mt-5' style={{width: 600, height: 400}}>
+                <div className='card mx-auto shadow mt-5' style={{width: 600}}>
                     <div className='card-header'>
                        <strong>Ticket Comments</strong>
                        <strong className='float-right'>Time Created</strong>
                     </div>
                     <ul className="list-group list-group-flush">
-                        {ticket.comments?.map(c => {
+                        {ticComments?.map(c => {
                             return(
-                                <li className="list-group-item pb-4"><strong>{c.commentable_id} ({c.commentable_type})</strong> {c.message} <p className='float-right'>{c.created_at}</p></li>
+                                <li className="list-group-item pb-4"><strong>{c.commentable.first_name} {c.commentable.last_name} ({c.commentable_type})</strong> {c.message} <p className='float-right'>{c.created_at}</p></li>
                             )})}
                     </ul>
                     <form onSubmit={handleNewComment} className='form-group w-75 mt-3'>

@@ -25,14 +25,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_154924) do
   create_table "comments", force: :cascade do |t|
     t.text "message"
     t.integer "user_id"
-    t.integer "developer_id"
-    t.integer "manager_id"
-    t.integer "admin_id"
     t.integer "ticket_id"
-    t.integer "commentable_id"
-    t.string "commentable_type"
+    t.string "commentable_type", null: false
+    t.integer "commentable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
   end
 
   create_table "developers", force: :cascade do |t|

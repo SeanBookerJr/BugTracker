@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import TicketList from '../User/TicketList';
 import { Pagination } from '../../components/Pagination';
 import EditProject from '../User/EditProject';
-import NewTicketModal from '../User/NewTicketModal';
+import ManNewTicketModal from './ManNewTicketModal';
 import ManMiniTicket from './ManMiniTicket';
 
 function ManProjectDetails() {
@@ -18,6 +18,7 @@ function ManProjectDetails() {
   const [tickets, setTickets] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setPostsPerPage] = useState(5)
+  const reload=()=>window.location.reload();
 
  
 
@@ -45,6 +46,8 @@ const currentPosts = tickets?.slice(indexOfFirstPost, indexOfLastPost)
 
 const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
+console.log(tickets);
+
   return (
     <div><div className='container mt-5'>
     <ManNavBar />
@@ -64,7 +67,7 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
                 
             {/* <button className="btn btn-primary btn-sm mt-3 float-right"style={{width: 100}}>Edit</button> */}
             <EditProject params={params}/>
-            <NewTicketModal params={params}/>
+            <ManNewTicketModal man={man} params={params}/>
        </div>
     </div>
     <div className="card mb-5 mx-auto h-25 mt-5" style={{width: 400}}>
@@ -86,8 +89,8 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
       </div>
         <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-xl-10 row ">
-              {proj.tickets?.map(ticket => 
-                <ManMiniTicket key={ticket.id} ticket={ticket}/>)}
+              {tickets?.map(ticket => 
+                <ManMiniTicket key={ticket.id} params={params} ticket={ticket} setTickets={setTickets}/>)}
             </div>
         </div>
     </div>

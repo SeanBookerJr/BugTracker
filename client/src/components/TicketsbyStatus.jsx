@@ -13,6 +13,8 @@ function TicketsbyStatus({user}) {
         tickStatus.push(tick.status)
     });
 
+    console.log(user.tickets);
+
     const tallyStatus = tickStatus => {
         const tally = {}
 
@@ -27,7 +29,9 @@ function TicketsbyStatus({user}) {
 
     data.push(["open", ticketStatus.open])
     data.push(["resolved", ticketStatus.resolved])
-    data.push(["in-progress", ticketStatus.inprogress])
+    data.push(["ongoing", ticketStatus.ongoing])
+
+    console.log(ticketStatus.resolved);
 
   return (
     <div>

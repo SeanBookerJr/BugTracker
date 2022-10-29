@@ -10,9 +10,7 @@ PROJECT_ITER = 600
 TICKET_ITER = 1200
 COMMENT_ITER = 2400
 
-
 ADMIN_ITER.times do
-
     Admin.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: Faker::App.name, password_digest: Faker::Alphanumeric.alphanumeric(number: 10), email: Faker::Internet.email, account_type: "Admin")
 end
 
@@ -32,11 +30,13 @@ PROJECT_ITER.times do
 end
 
 TICKET_ITER.times do
-    Ticket.create!(title: Faker::App.name, type_of: ["performance", "security", "functional", "usability", "syntax", "compatability"].to_a.sample, priority: ["low", "medium", "high"].to_a.sample, description: Faker::Lorem.sentences(number: 2), status: ["open", "resolved", "in-progress"].to_a.sample, user_id: Faker::Number.within(range: 1..100), project_id: Faker::Number.within(range: 1..600), developer_id: Faker::Number.within(range: 1..50))
+    Ticket.create!(title: Faker::App.name, type_of: ["performance", "security", "functional", "usability", "syntax", "compatability"].to_a.sample, priority: ["low", "medium", "high"].to_a.sample, description: Faker::Lorem.sentences(number: 2), status: ["open", "resolved", "ongoing"].to_a.sample, user_id: Faker::Number.within(range: 1..100), project_id: Faker::Number.within(range: 1..600), developer_id: Faker::Number.within(range: 1..50))
 end
 
 COMMENT_ITER.times do
-    Comment.create!(message: Faker::Lorem.sentences(number: 1), ticket_id: Faker::Number.within(range: 1..1200), commentable_id: Faker::Number.within(range: 1..100), commentable_type: ["Admin", "Manager", "Developer", "User"].to_a.sample)
+    Comment.create!(message: Faker::Lorem.sentences(number: 1), ticket_id: Faker::Number.within(range: 1..1200),commentable: [User.find(User.pluck(:id).sample), Developer.find(Developer.pluck(:id).sample), Manager.find(Manager.pluck(:id).sample)].to_a.sample)
+    
+    # commentable_id: Faker::Number.within(range: 1..180), commentable_type: ["Admin", "Manager", "Developer", "User"].to_a.sample)
 end
 
 puts "seeding finished"

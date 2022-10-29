@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function MiniTicket({ticket}) {
+function MiniTicket({ticket, params, setTickets}) {
 
    let navigate = useNavigate()
 
@@ -11,25 +11,35 @@ function MiniTicket({ticket}) {
       navigate(`/TicketDetails/${ticket.id}`)
    }
 
-   function handleDelete(e) {
-      e.preventDefault()
-
-         fetch(`/tickets/${ticket.id}`, {
+   function deleteTicketClick(e){
+      fetch(`/tickets/${ticket.id}`, {
          method: 'DELETE',
          headers: {
             'Content-type':'application/json'
          }
-      })
-      .then(res => {
+       })
+       .then(res => {
          if (res.ok) {
              res.json()
              .then(data => {
                 console.log(data);
-                 reload()
              })
          }
      })
+    }
 
+   function handleUpdatedTickets(e) {
+      fetch(`/project/alltickets/${params.id}`)
+   .then(res => res.json())
+   .then(data => {
+    if (data) {console.log(data);
+      setTickets(data.tickets)}
+   })
+    }
+
+    function handleDeleteStuff(e) {
+      deleteTicketClick()
+      handleUpdatedTickets()
    }
 
   return (
@@ -47,7 +57,7 @@ function MiniTicket({ticket}) {
                 <button onClick={handleButtonCLick} style={{width: 100}}  type="button" className="btn btn-outline-dark btn-sm float-right">
                     <i className="fas fa-plus"></i> Details
                  </button>
-                 <button onClick={handleDelete} type="button" className="btn btn-outline-dark btn-sm float-right w-25 me-2"><i className="fas fa-plus"></i>Delete</button>
+                 <button onClick={handleDeleteStuff} type="button" className="btn btn-outline-dark btn-sm float-right w-25 me-2"><i className="fas fa-plus"></i>Delete</button>
             </div>
          </div>
   )
