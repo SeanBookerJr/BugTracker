@@ -17,6 +17,7 @@ function ManagerTickets() {
   
 
   console.log(filteredTickets);
+  console.log(user);
 
   return (
     <div>
