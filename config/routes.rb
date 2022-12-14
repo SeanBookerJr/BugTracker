@@ -15,9 +15,17 @@ Rails.application.routes.draw do
   
   get '/project/alltickets/:id', to: 'projects#get_tickets'
 
+  get '/user/allprojects/:id', to: 'users#get_projects'
+
   get '/ticket/details/:id', to: 'tickets#details'
 
   get '/ticket/comments/:id', to: 'tickets#ticket_comments'
+
+  get '/user/notifications/:id', to: 'users#notifications'
+
+  get '/developer/notifications/:id', to: 'developers#notifications'
+
+  get '/manager/notifications/:id', to: 'managers#notifications'
 
 
   # Defines the root path route ("/")

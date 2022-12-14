@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:create, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :notifications, :get_projects]
+  skip_before_action :authorize, only: [:create, :update, :notifications, :get_projects]
 
   # GET /users or /users.json
   def index
@@ -21,6 +21,10 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  def get_projects
+    render json: @user
   end
 
   # POST /users or /users.json
@@ -66,6 +70,14 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def notifications
+      notifications = Notification.where(recipient: current_user).newest_first.limit(9)
+      @unread = notifications.unread
+      @read = notifications.read
+
+    render json: @user.notifications.unread
   end
 
   private

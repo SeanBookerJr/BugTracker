@@ -36,7 +36,7 @@ function handleSignInButton(e) {
       res.json()
       .then(data => {
         console.log(data)
-        if(data.account_type === "Customer") {
+        if(data.account_type === "User") {
           setErrors('')
           setUser(data)
           navigate('./CustomerDashboard')

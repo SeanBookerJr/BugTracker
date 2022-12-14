@@ -6,6 +6,7 @@ class ManagerSerializer < ActiveModel::Serializer
     has_many :projects
     has_many :tickets, through: :users
     has_many :comments, through: :users
+    has_many :notifications, as: :recipient
 
     belongs_to :admin
 end

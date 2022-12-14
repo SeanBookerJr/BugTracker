@@ -7,6 +7,8 @@ function ManMiniProject({user, proj}) {
     function handleDetailsClick() {
         navigate(`/ManProjectDetails/${proj.id}`)
       }
+
+      console.log(proj);
   return (
     <div className="card mb-4 mx-auto shadow p-3 bg-white rounded" style={{width: 450}} >
     <div className="card-body p-4">

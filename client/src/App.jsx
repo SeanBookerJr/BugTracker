@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, useParams} from 'react-router-dom';
 import './index.css'
 
 import Login from './Pages/Login/Index'
@@ -25,10 +25,13 @@ import ManagerProjects from './Pages/Manager/ManagerProjects';
 import ManagerTickets from './Pages/Manager/ManagerTickets';
 import ManProjectDetails from './Pages/Manager/ManProjectDetails';
 import ManTicketDetails from './Pages/Manager/ManTicketDetails';
+import RoleAssignments from './Pages/Manager/RoleAssignments';
 
-function App({cable}) {
+function App() {
 
   const [user, setUser] = useState({})
+
+  const { id } = useParams();
 
   useEffect( () => {
     fetch('/me')
@@ -42,6 +45,9 @@ function App({cable}) {
       }
     })
   }, [])
+
+  console.log(id);
+  
 
   return (
     <Router>
@@ -67,6 +73,7 @@ function App({cable}) {
         <Route path='/TicketDetails/:id' element={user &&  <TicketDetails user={user}/>} />
         <Route path='/DevTicketDetails/:id' element={user &&  <DevTicketDetails user={user}/>} />
         <Route path='/ManTicketDetails/:id' element={user &&  <ManTicketDetails user={user}/>} />
+        <Route path='/RoleAssignments' element={user &&  <RoleAssignments user={user}/>} />
       </Routes>
     </Router>
   );

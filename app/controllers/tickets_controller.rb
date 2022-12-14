@@ -11,6 +11,7 @@ class TicketsController < ApplicationController
   # GET /tickets/1 or /tickets/1.json
   def show
     render json: @tickets
+
   end
 
   # GET /tickets/new
@@ -49,6 +50,8 @@ class TicketsController < ApplicationController
 
   def details
     render json: @ticket
+
+    mark_notifications_as_read
   end
 
   def ticket_comments
@@ -77,5 +80,12 @@ class TicketsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def ticket_params
       params.permit(:title, :type_of, :status, :priority, :description, :user_id, :developer_id, :manager_id, :admin_id, :project_id)
+    end
+
+    def mark_notifications_as_read
+      if current_user
+        notifications_to_mark_as_read = @ticket.notifications_as_ticket.where(recipient: current_user)
+        notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
+     end 
     end
 end

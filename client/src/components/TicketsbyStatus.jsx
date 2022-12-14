@@ -13,11 +13,8 @@ function TicketsbyStatus({user}) {
         tickStatus.push(tick.status)
     });
 
-<<<<<<< HEAD
     console.log(user.tickets);
 
-=======
->>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
     const tallyStatus = tickStatus => {
         const tally = {}
 
@@ -32,13 +29,9 @@ function TicketsbyStatus({user}) {
 
     data.push(["open", ticketStatus.open])
     data.push(["resolved", ticketStatus.resolved])
-<<<<<<< HEAD
     data.push(["ongoing", ticketStatus.ongoing])
 
     console.log(ticketStatus.resolved);
-=======
-    data.push(["in-progress", ticketStatus.inprogress])
->>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
 
   return (
     <div>

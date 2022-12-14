@@ -9,27 +9,22 @@ function ManagerProjects() {
   const user = JSON.parse(localStorage.getItem("user"))
 
   const [query, setQuery] = useState("") 
+  const [projects, setProjects] = useState([]) 
 
-  
-  const filteredProjects = user.projects?.filter(singleProj => singleProj.title.toLowerCase().includes(query.toLowerCase()))
-  const [projects, setProjects] = useState(filteredProjects) 
   useEffect(() => {
-    setProjects(filteredProjects)
-  }, [])
-  
-  const handleQuery = e => {
-    setQuery(e.target.value)
-  }
+    fetch(`/user/allprojects/${user.id}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+     setProjects(data.projects)
+    })
+ }, [])
 
-  function handleOnDragEnd(result) {
-    if (!result.destination) return
-    const items = Array.from(filteredProjects)
-    const [reordereditem] = items.splice(result.source.index, 1)
-    items.splice(result.destination.index, 0, reordereditem)
-  
-    setProjects(items)
+ const handleQuery = e => {
+   setQuery(e.target.value)
   }
   
+  const filteredProjects = projects?.filter(singleProj => singleProj.title.toLowerCase().includes(query.toLowerCase()))
 
   return (
     <div>
@@ -44,25 +39,14 @@ function ManagerProjects() {
     <div className="container border">
     <h1 className='mx-auto h3 pb-3'>{user.first_name}'s Projects</h1>
   <div className="row d-flex justify-content-center align-items-center h-100">
-    <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId={'projects'}>
-        {(provided) => (
-    <ul className="col col-xl-10 row " {...provided.droppableProps} ref={provided.innerRef} >
-      {projects?.map((proj, index) => 
-      <Draggable provided={provided} key={proj.id} draggableId={(proj.id).toString()} index={index} >
-        {(provided) => (
-          <li className="col-sm " {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+    <ul className="col col-xl-10 row " >
+      {filteredProjects?.map((proj, index) => 
+          <li className="col-sm ">
         <ManMiniProject proj={proj} user={user} />
         </li>
         )}
-        </Draggable>        
-        )}
-        {provided.placeholder}
     </ul>
-          
-    )}
-    </Droppable>
-    </DragDropContext>
+        
   </div>
 </div>
 </div>

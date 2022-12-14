@@ -1,19 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function MiniProject({proj}) {
-   const user = JSON.parse(localStorage.getItem("user"))
+function MiniProject({proj, user, setProjects}) {
+   
     let navigate = useNavigate()
-
-    const reload=()=>window.location.reload();
 
     function handleDetailsClick() {
         navigate(`/ProjectDetails/${proj.id}`)
       }
 
       function handleDelete(e) {
-        e.preventDefault()
-  
            fetch(`/projects/${proj.id}`, {
            method: 'DELETE',
            headers: {
@@ -25,12 +21,24 @@ function MiniProject({proj}) {
                res.json()
                .then(data => {
                   console.log(data);
-                   reload()
                })
            }
        })
-  
      }
+
+     function handleUpdatedTickets(e) {
+      fetch(`/user/allprojects/${user.id}`)
+      .then(res => res.json())
+      .then(data => {
+      if (data) {console.log(data);
+      setProjects(data.projects)}
+   })
+    }
+
+    function handleDeleteStuff(e) {
+      handleDelete()
+      handleUpdatedTickets()
+   }
 
   return ( 
          <div className="card mb-4 mx-auto shadow p-3 bg-white rounded" style={{width: 450}} >
@@ -47,7 +55,7 @@ function MiniProject({proj}) {
                 <button style={{width: 100}} onClick={() => handleDetailsClick()} type="button" className="btn btn-outline-dark btn-sm float-right">
                     <i className="fas fa-plus"></i> Details
                  </button>
-                 <button onClick={handleDelete} type="button" className="btn btn-outline-dark btn-sm float-right w-25 me-2"><i className="fas fa-plus"></i>Delete</button>
+                 <button onClick={handleDeleteStuff} type="button" className="btn btn-outline-dark btn-sm float-right w-25 me-2"><i className="fas fa-plus"></i>Delete</button>
             </div>
          </div>
   )

@@ -8,4 +8,6 @@ class Developer < ApplicationRecord
     has_many :tickets, through: :users
     has_many :comments, as: :commentable
 
+    has_many :notifications, as: :recipient
+
 end

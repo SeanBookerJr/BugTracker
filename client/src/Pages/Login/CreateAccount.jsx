@@ -6,7 +6,7 @@ function CreateAccount({user, setUser}) {
 
     let navigate = useNavigate()
 
-const [accountType, setAccountType] = useState('Customer')
+const [accountType, setAccountType] = useState('User')
 const [firstName, setFirstName] = useState('')
 const [lastName, setLastName] = useState('')
 const [email, setEmail] = useState('')
@@ -27,7 +27,7 @@ function handleFormSubmit(e) {
     formData.append("account_type", accountType)
 
 
-    if(accountType === "Customer")  {
+    if(accountType === "User")  {
     fetch('/users', {
         method: 'POST',
           body: formData
@@ -135,7 +135,7 @@ const handleAccountTypeChange = e => {
         <div className="form-group">
         <label className="form-label" htmlFor="account-type"> Select Account Type:</label>
         <select onChange={handleAccountTypeChange} value={accountType} className='form-select' id='select-account'>
-            <option>Customer</option>
+            <option>User</option>
             <option>Developer</option>
             <option>Manager</option>
             <option>Admin</option>

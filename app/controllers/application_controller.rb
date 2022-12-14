@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
     include ActiveStorage::Blob::Analyzable
 
     before_action :authorize
+    before_action :set_notifications, if: :current_user
     skip_before_action :verify_authenticity_token
 
 
@@ -25,15 +26,20 @@ class ApplicationController < ActionController::Base
     end
 
     def current_project
-
         @current_project ||= Project.find_by(id: params[:project_id])
     end
 
     def current_ticket
-
         @current_ticket ||= Ticket.find_by(id: params[:ticket_id])
     end
-    
+
+    def set_notifications
+        
+        notifications = Notification.where(recipient: current_user).newest_first.limit(9)
+        @unread = notifications.unread
+        @read = notifications.read
+    end
+      
     def authorize
         unless current_user
             render json: { message: 'Not authorized' }, status: 401

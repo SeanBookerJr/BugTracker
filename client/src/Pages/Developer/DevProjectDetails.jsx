@@ -17,6 +17,8 @@ function DevProjectDetails() {
   const [tickets, setTickets] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage, setPostsPerPage] = useState(5)
+  const [projUserFirst, setProjUserFirst] = useState([])
+  const [projUserLast, setProjUserLast] = useState([])
 
 
 useEffect(() => {
@@ -27,6 +29,8 @@ useEffect(() => {
     setProj(data)
     setMan(data.manager)
     setTickets(data.tickets)
+    projUserFirst(proj.user.first_name)
+    projUserLast(proj.user.last_name)
    })
 }, [])
 
@@ -53,7 +57,7 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
             <p className="card-text mb-2"><strong>Title: </strong>{proj.title}</p>
             <p className="card-text mb-2"><strong>Description : </strong>{proj.description}</p>          
                 <p className="card-text mb-2"><strong>Assigned Manager : </strong>{man.first_name} {man.last_name}</p>
-                <p className="card-text mb-2"><strong>Customer : </strong>{proj.user.first_name} {proj.user.last_name}</p>
+                <p className="card-text mb-2"><strong>Customer : </strong>{projUserFirst} {projUserLast}</p>
                 <p className="card-text mb-2"><strong>Created : </strong>{proj.created_at}</p>
                 <p className="card-text mb-2"><strong>Last Updated :</strong>{proj.updated_at}</p>
                 
@@ -81,11 +85,7 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
       </div>
         <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-xl-10 row ">
-<<<<<<< HEAD
               {tickets?.map(ticket => 
-=======
-              {proj.tickets?.map(ticket => 
->>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
                 <DevMiniTicket key={ticket.id} ticket={ticket}/>)}
             </div>
         </div>

@@ -27,6 +27,7 @@ class CommentsController < ApplicationController
   # POST /comments or /comments.json
   def create
     @comment = Comment.create!(comment_params)
+    
 
     if @comment.save
       render json: @comment
@@ -68,4 +69,5 @@ class CommentsController < ApplicationController
     def comment_params
       params.permit(:message, :user_id, :developer_id, :manager_id, :admin_id, :ticket_id, :commentable_id, :commentable_type, :commentable)
     end
+
 end

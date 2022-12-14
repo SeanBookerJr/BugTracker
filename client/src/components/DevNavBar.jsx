@@ -1,4 +1,5 @@
 import React from 'react'
+import NotifModal from './NotifModal'
 import { useNavigate } from 'react-router-dom'
 
 function DevNavBar() {
@@ -37,6 +38,11 @@ function DevNavBar() {
               Tickets
             </a>
           </li>
+          <li className="nav-item">
+              <a className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white">
+              <NotifModal/>
+              </a>
+            </li>
       </ul>
     </div>
   </div>

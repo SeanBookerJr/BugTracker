@@ -8,4 +8,7 @@ class Admin < ApplicationRecord
     has_many :tickets, through: :users
     has_many :comments, as: :commentable
 
+    # has_noticed_notifications model_name: 'Notification'
+    # has_many :notifications, as: :recipient, dependent: :destroy
+
 end

@@ -22,6 +22,7 @@ function NewTicketModal({params}) {
         formData.append("description", descrip)
         formData.append("type_of", typeOf)
         formData.append("priority", priority)
+        formData.append("status", "open")
         formData.append("project_id", params.id)
 
         fetch('/tickets', {

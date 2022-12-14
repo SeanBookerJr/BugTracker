@@ -77,3 +77,5 @@ gem "active_model_serializers"
 
 gem 'rack-cors'
 
+
+gem "noticed", "~> 1.6"

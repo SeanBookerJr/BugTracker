@@ -9,26 +9,36 @@ function TicketDetails({user}) {
 
         const [ticket, setTicket] = useState([])
         const [message, setMessage] = useState('')
-        const [errors, setErrors] = useState('')
+        const [errors, setErrors] = useState([])
+        const [ticDev, setTicDev] = useState('')
+        const [ticTimeCreated, setTicTimeCreated] = useState([])
+        const [ticTimeUpdated, setTicTimeUpdated] = useState('')
+        const [ticComments, setTicComments] = useState([])
         const reload=()=>window.location.reload();
 
         useEffect(() => {
             fetch(`/ticket/details/${params.id}`)
             .then(res => res.json())
             .then(data => {
-              console.log(data);
              setTicket(data)
+             setTicDev(data.developer)
             })
-         }, [])
+         }, [params])
 
-         console.log(ticket);
+         useEffect(() => {
+            fetch(`/ticket/comments/${params.id}`)
+            .then(res => res.json())
+            .then(comments => {
+            setTicComments(comments)
+            })
+         }, [params])
 
          function handleNewComment(e) {
              e.preventDefault()
 
             const formData = new FormData()
             formData.append("message", message)
-            formData.append("user_id", user.id)
+            // formData.append("user_id", user.id)
             formData.append("ticket_id", params.id)
             formData.append("commentable_id", user.id)
             formData.append("commentable_type", user.account_type)
@@ -53,6 +63,18 @@ function TicketDetails({user}) {
 
          const handleCommentChange = e => setMessage(e.target.value)
 
+       
+        //  useEffect(() => {
+        //     setTicTimeCreated(ticket.created_at.toLocaleString())
+        //     setTicTimeUpdated(ticket.updated_at.toLocaleString())
+        //  }, [])
+         
+        //  console.log(ticTimeCreated);
+
+            var tc = new Date(ticket.created_at)
+            var tu = new Date(ticket.updated_at)
+
+    
   return (
     <div>
         <Navbar />
@@ -63,6 +85,7 @@ function TicketDetails({user}) {
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item pb-4"><strong>Title:</strong> {ticket.title}</li>
                         <li className="list-group-item pb-4"><strong>Description:</strong> {ticket.description}</li>
+                        <li className="list-group-item pb-4"><strong>Assigned Developer:</strong> {ticDev.first_name} {ticDev.last_name}</li>
                         <li className="list-group-item pb-4"><strong>Priority:</strong> {ticket.priority}</li>
                         <li className="list-group-item pb-4"><strong>status:</strong> {ticket.status}</li>
                         <li className="list-group-item pb-4"><strong>Type of Bug:</strong> {ticket.type_of}</li>
@@ -74,9 +97,9 @@ function TicketDetails({user}) {
                        <strong className='float-right'>Time Created</strong>
                     </div>
                     <ul className="list-group list-group-flush">
-                        {ticket.comments?.map(c => {
+                        {ticComments?.map(c => {
                             return(
-                                <li className="list-group-item pb-4"><strong>{user.first_name}</strong> {c.message} <p className='float-right'>{c.created_at}</p></li>
+                                <li className="list-group-item pb-4"><strong>{c.commentable.first_name} {c.commentable.last_name} ({c.commentable.account_type})</strong> {c.message} <p className='float-right pt-3'>{new Date(c.created_at).toString()}</p></li>
                             )})}
                     </ul>
                     <form onSubmit={handleNewComment} className='form-group w-75 mt-3'>
@@ -88,8 +111,8 @@ function TicketDetails({user}) {
                  <div className='card mx-auto shadow mt-5 mb-4' style={{width: 600}}>
                  <ul className="list-group list-group-flush">
                     <div className='card-header'><strong>Ticket History</strong></div>
-                        <li className="list-group-item pb-4"><strong>Time created : </strong>{ticket.created_at}</li>
-                        <li className="list-group-item pb-4"><strong>Time updated : </strong> {ticket.updated_at}</li>
+                        <li className="list-group-item pb-4"><strong>Time created : </strong>{tc.toString()}</li>
+                        <li className="list-group-item pb-4"><strong>Time updated : </strong> {tu.toString()}</li>
                         <li className="list-group-item pb-4"><strong>Status :</strong> {ticket.status}</li>
                    </ul>   
                     </div>

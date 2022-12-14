@@ -4,12 +4,8 @@ import ManNavBar from '../../components/ManNavBar';
 import { useNavigate } from 'react-router-dom';
 import ManTicketSend from './ManTicketSend';
 
-<<<<<<< HEAD
 function ManagerTickets() {
   const user = JSON.parse(localStorage.getItem("user"))
-=======
-function ManagerTickets({user}) {
->>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
   const [query, setQuery] = useState("")
 
   const filteredTickets = user.tickets?.filter(singleProj => singleProj.title.toLowerCase().includes(query.toLowerCase()))
@@ -18,12 +14,9 @@ function ManagerTickets({user}) {
     setQuery(e.target.value)
   }
 
-<<<<<<< HEAD
   
 
-=======
->>>>>>> c1bdfcf381bc3a9039f48c4f4c559d74e95ead56
-  console.log(user);
+  console.log(filteredTickets);
 
   return (
     <div>
@@ -45,7 +38,7 @@ function ManagerTickets({user}) {
         <div className="card-body p-4">
           <h3 className="mb-3">{t.title}</h3>
           <p className="small mb-0"><i className="far fa-star fa-lg"></i> <span className="mx-2">|</span> Created by
-            <strong> {user.first_name} {user.last_name}</strong></p>
+            <strong> {t.user.first_name} {t.user.last_name}</strong></p>
           <div className="d-flex justify-content-start align-items-center">
             <p className="mb-0 text-uppercase"><i className="fas fa-cog me-2"></i> <span
                 className="text-muted small">{t.priority}</span></p>

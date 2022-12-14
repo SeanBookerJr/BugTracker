@@ -22,7 +22,7 @@ DEVELOPER_ITER.times do
     Developer.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: Faker::App.name, password_digest: Faker::Alphanumeric.alphanumeric(number: 10), email: Faker::Internet.email, manager_id: Faker::Number.within(range: 1..20), account_type: "Developer")
 end
 USER_ITER.times do
-    User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username:Faker::App.name, password_digest: Faker::Alphanumeric.alphanumeric(number: 10), email: Faker::Internet.email, admin_id: Faker::Number.within(range: 1..10), manager_id: Faker::Number.within(range: 1..20), developer_id: Faker::Number.within(range: 1..50), account_type: "Customer")
+    User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username:Faker::App.name, password_digest: Faker::Alphanumeric.alphanumeric(number: 10), email: Faker::Internet.email, admin_id: Faker::Number.within(range: 1..10), manager_id: Faker::Number.within(range: 1..20), developer_id: Faker::Number.within(range: 1..50), account_type: "User")
 end
 
 PROJECT_ITER.times do

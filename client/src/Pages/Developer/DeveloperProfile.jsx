@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DevNavBar from '../../components/DevNavBar'
 import EditDevProfile from './EditDevProfile'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function DeveloperProfile({user, setUser}) {
+function DeveloperProfile({setUser}) {
+    const user = JSON.parse(localStorage.getItem("user"))
 
     let navigate = useNavigate()
     
@@ -15,6 +16,15 @@ function DeveloperProfile({user, setUser}) {
         setUser({})
         navigate('/')
     }
+
+    const [manFirst, setManFirst] = useState([])
+    const [manLast, setManLast] = useState([])
+
+    useEffect(() => {
+     setManFirst(user.manager.first_name)
+     setManLast(user.manager.last_name)
+    }, [])
+    
 
   return (
     <div>
@@ -48,6 +58,8 @@ function DeveloperProfile({user, setUser}) {
                              <p className="list-group-item pb-4"><strong>Username :</strong> {user.username}</p>
 
                              <p className="list-group-item pb-4"><strong>Account Type :</strong> {user.account_type}</p>
+
+                             <p className="list-group-item pb-4"><strong>Your Manager :</strong> {manFirst} {manLast}</p>
 
                         </ul>
                  </div>

@@ -5,5 +5,7 @@ class Project < ApplicationRecord
     has_many :tickets, dependent: :destroy
     has_many :comments, through: :tickets
 
+    #  has_noticed_notifications model_name: 'Notification'
+    #  has_many :notifications, through: :user, dependent: :destroy
 
 end
